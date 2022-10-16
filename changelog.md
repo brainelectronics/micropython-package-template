@@ -17,6 +17,11 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 -->
 
 ## Released
+## [0.1.1] - 2022-10-16
+### Fixed
+- Move `src/be_upy_blink` to `be_upy_blink` to avoid installations into `/lib/src/be_upy_blink` on a uPy board via `upip`, see [#3][ref-issue-3]
+- Adjust all paths to `be_upy_blink` folder and contained files
+
 ## [0.1.0] - 2022-10-16
 ### Added
 - This changelog file
@@ -36,12 +41,11 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 - [`setup.py`](setup.py) and [`sdist_upip.py`](sdist_upip.py) file
 
 <!-- Links -->
-[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.1.0...develop
+[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.1.1...develop
 
+[0.1.1]: https://github.com/brainelectronics/micropython-package-template/tree/0.1.1
 [0.1.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.1.0
 
-<!--
-[ref-issue-1]: https://github.com/brainelectronics/micropython-package-template/issues/1
--->
+[ref-issue-3]: https://github.com/brainelectronics/micropython-package-template/issues/3
 
 [ref-python-gitignore-template]: https://github.com/github/gitignore/blob/e5323759e387ba347a9d50f8b0ddd16502eb71d4/Python.gitignore

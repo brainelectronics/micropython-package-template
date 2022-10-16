@@ -13,7 +13,8 @@ omit =
     version.py
 
 [report]
-include = src/*
+# include = src/*
+include = be_upy_blink/*
 # Regexes for lines to exclude from consideration
 
 ignore_errors = True

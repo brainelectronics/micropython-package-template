@@ -92,7 +92,7 @@ folders to the device
 mkdir /pyboard/lib
 mkdir /pyboard/lib/be_upy_blink
 
-cp src/be_upy_blink/* /pyboard/lib/be_upy_blink
+cp be_upy_blink/* /pyboard/lib/be_upy_blink
 
 cp examples/main.py /pyboard
 cp examples/boot.py /pyboard
