@@ -11,7 +11,7 @@ here = Path(__file__).parent.resolve()
 long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 # load elements of version.py
-exec(open(here / 'be_upy_blink' / 'version.py').read())
+exec(open(here / 'src' / 'be_upy_blink' / 'version.py').read())
 
 setup(
     name='micropython-package-template',
@@ -34,6 +34,6 @@ setup(
     },
     license='MIT',
     cmdclass={'sdist': sdist_upip.sdist},
-    packages=['be_upy_blink'],
+    packages=['src/be_upy_blink'],
     install_requires=[]
 )
