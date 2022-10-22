@@ -20,6 +20,9 @@ MicroPython PyPi package template with GitHub Action based testing and deploy
 	- [Install required tools](#install-required-tools)
 - [Setup](#setup)
 	- [Install package with upip](#install-package-with-upip)
+		- [General](#general)
+		- [Specific version](#specific-version)
+		- [Test version](#test-version)
 	- [Manually](#manually)
 		- [Upload files to board](#upload-files-to-board)
 - [Usage](#usage)
@@ -64,12 +67,40 @@ station.connect('SSID', 'PASSWORD')
 station.isconnected()
 ```
 
-and install this lib on the MicroPython device like this
+#### General
+
+Install the latest package version of this lib on the MicroPython device
 
 ```python
 import upip
 upip.install('micropython-package-template')
 ```
+
+#### Specific version
+
+Install a specific, fixed package version of this lib on the MicroPython device
+
+```python
+import upip
+upip.install('micropython-package-template==0.1.1')
+```
+
+#### Test version
+
+Install a specific release candidate version uploaded to
+[Test Python Package Index](https://test.pypi.org/) on every PR on the
+MicroPython device. If no specific version is set, the latest stable version
+will be used.
+
+```python
+import upip
+# overwrite index_urls to only take artifacts from test.pypi.org
+upip.index_urls = ['https://test.pypi.org/pypi']
+upip.install('micropython-package-template==0.2.0rc1.dev6')
+```
+
+See also [brainelectronics Test PyPi Server in Docker][ref-brainelectronics-test-pypiserver]
+for a test PyPi server running on Docker.
 
 ### Manually
 
@@ -140,4 +171,5 @@ Based on the [PyPa sample project][ref-pypa-sample].
 
 <!-- Links -->
 [ref-remote-upy-shell]: https://github.com/dhylands/rshell
+[ref-brainelectronics-test-pypiserver]: https://github.com/brainelectronics/test-pypiserver
 [ref-pypa-sample]: https://github.com/pypa/sampleproject
