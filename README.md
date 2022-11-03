@@ -1,10 +1,11 @@
 # MicroPython package template
 
-[![Downloads](https://pepy.tech/badge/be-modbus-wrapper)](https://pepy.tech/project/micropython-package-template)
+[![Downloads](https://pepy.tech/badge/micropython-package-template)](https://pepy.tech/project/micropython-package-template)
 ![Release](https://img.shields.io/github/v/release/brainelectronics/micropython-package-template?include_prereleases&color=success)
-![Python](https://img.shields.io/badge/python3-Ok-green.svg)
+![MicroPython](https://img.shields.io/badge/micropython-Ok-green.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![codecov](https://codecov.io/github/brainelectronics/micropython-package-template/branch/main/graph/badge.svg)](https://app.codecov.io/github/brainelectronics/micropython-package-template)
+[![CI](https://github.com/brainelectronics/micropython-package-template/actions/workflows/release.yml/badge.svg)](https://github.com/brainelectronics/micropython-package-template/actions/workflows/release.yml)
 
 MicroPython PyPi package template project with auto deploy
 
