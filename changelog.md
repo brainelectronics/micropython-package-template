@@ -17,6 +17,17 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 -->
 
 ## Released
+## [0.3.0] - 2022-11-03
+### Added
+- Lint package with `flake8` with [test workflow](.github/workflows/test.yaml)
+- CI upload status badge added to [`README`](README.md)
+
+### Fixed
+- Remove not required packages `setuptools`, `wheel` and `build` from release
+  and test-release workflow files
+- Show download of this package on badge instead of `be-modbus-wrapper`
+- Show `MicroPython Ok` badge instead of `Python3 Ok` in [`README`](README.md)
+
 ## [0.2.0] - 2022-10-22
 ### Added
 - Deploy to [Test Python Package Index](https://test.pypi.org/) on every PR
@@ -54,8 +65,9 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 - [`setup.py`](setup.py) and [`sdist_upip.py`](sdist_upip.py) file
 
 <!-- Links -->
-[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.2.0...main
+[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.3.0...main
 
+[0.3.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.3.0
 [0.2.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.2.0
 [0.1.1]: https://github.com/brainelectronics/micropython-package-template/tree/0.1.1
 [0.1.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.1.0
