@@ -17,9 +17,14 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 -->
 
 ## Released
+## [0.5.0] - 2023-02-20
+### Added
+- `.readthedocs.yaml` definition file for ReadTheDocs, see #10
+- `docs` folder containing example files and configurations, see #10
+
 ## [0.4.0] - 2023-02-20
 ### Added
-- `test-release` and `release` workflows create changelog based (pre-)releases
+- `test-release` and `release` workflows create changelog based (pre-)releases, see #2
 - Documentation for manually creating a package and uploading it to PyPi in root README
 
 ### Fixed
@@ -73,8 +78,9 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 - [`setup.py`](setup.py) and [`sdist_upip.py`](sdist_upip.py) file
 
 <!-- Links -->
-[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.4.0...main
+[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.5.0...main
 
+[0.5.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.5.0
 [0.4.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.4.0
 [0.3.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.3.0
 [0.2.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.2.0
