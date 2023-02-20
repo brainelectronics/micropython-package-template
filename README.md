@@ -27,6 +27,10 @@ MicroPython PyPi package template with GitHub Action based testing and deploy
 	- [Manually](#manually)
 		- [Upload files to board](#upload-files-to-board)
 - [Usage](#usage)
+- [Create a PyPi \(micropython\) package](#create-a-pypi-micropython-package)
+	- [Setup](#setup-1)
+	- [Create a distribution](#create-a-distribution)
+	- [Upload to PyPi](#upload-to-pypi)
 - [Contributing](#contributing)
 	- [Unittests](#unittests)
 - [Credits](#credits)
@@ -142,6 +146,51 @@ flash_led(pin=led_pin, amount=3)
 # flash_led(pin=led_pin, amount=3, on_time=1, off_time=3)
 ```
 
+## Create a PyPi (micropython) package
+
+### Setup
+
+Install the required python package with the following command in a virtual
+environment to avoid any conflicts with other packages installed on your local
+system.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+
+pip install twine
+```
+
+### Create a distribution
+
+This module overrides distutils (also compatible with setuptools) `sdist`
+command to perform pre- and post-processing as required for MicroPython's
+upip package manager. This script is taken from
+[pfalcon's picoweb][ref-pfalcon-picoweb-sdist-upip] and updated to be PEP8
+conform.
+
+```bash
+python setup.py sdist
+```
+
+A new folder `dist` will be created. The [`sdist_upip`](sdist_upip.py) will be
+used to create everything necessary.
+
+### Upload to PyPi
+
+**Be aware: [pypi.org][ref-pypi] and [test.pypi.org][ref-test-pypi] are different**
+
+You can **NOT** login to [test.pypi.org][ref-test-pypi] with the
+[pypi.org][ref-pypi] account unless you created the same on the other. See
+[invalid auth help page of **test** pypi][ref-invalid-auth-test-pypi]
+
+For testing purposes add `--repository testpypi` to
+upload it to [test.pypi.org][ref-test-pypi]
+
+```bash
+twine upload dist/micropython-package-template-*.tar.gz -u PYPI_USERNAME -p PYPI_PASSWORD
+```
+
 ## Contributing
 
 ### Unittests
@@ -174,3 +223,7 @@ Based on the [PyPa sample project][ref-pypa-sample].
 [ref-remote-upy-shell]: https://github.com/dhylands/rshell
 [ref-brainelectronics-test-pypiserver]: https://github.com/brainelectronics/test-pypiserver
 [ref-pypa-sample]: https://github.com/pypa/sampleproject
+[ref-pfalcon-picoweb-sdist-upip]: https://github.com/pfalcon/picoweb/blob/b74428ebdde97ed1795338c13a3bdf05d71366a0/sdist_upip.py
+[ref-test-pypi]: https://test.pypi.org/
+[ref-pypi]: https://pypi.org/
+[ref-invalid-auth-test-pypi]: https://test.pypi.org/help/#invalid-auth
