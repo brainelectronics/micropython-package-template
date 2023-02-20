@@ -40,6 +40,7 @@ exclude =
     __init__.py
     # example testing folder before going live
     thinking
+    .idea
     # custom scripts, not being part of the distribution
     libs_external
     sdist_upip.py
