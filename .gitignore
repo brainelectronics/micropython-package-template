@@ -1,9 +1,3 @@
-# created files based on README examples
-examples/*.c
-examples/*.h
-examples/*.py
-examples/version_info
-
 # custom, package specific ignores
 .DS_Store
 .DS_Store?
@@ -15,9 +9,6 @@ thinking/
 *.bak
 *.o
 .vagrant/
-
-# meson files under development
-untitled.meson.build
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
