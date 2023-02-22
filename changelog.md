@@ -17,6 +17,18 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 -->
 
 ## Released
+## [0.6.0] - 2023-02-22
+### Added
+- `.editorconfig` for common editor settings, see #12
+- `.yamllint` to lint all used YAML files, see #12
+- `codecov.yaml` to specify further settings and limits for the coverage
+- `yamllint` package to the `requirements-test.txt` file
+- Run YAML linter on test workflow
+
+### Changed
+- Fixed uncovered YAML syntax issues in all workflow files
+- Removed unused files from `.gitignore` file
+
 ## [0.5.0] - 2023-02-20
 ### Added
 - `.readthedocs.yaml` definition file for ReadTheDocs, see #10
@@ -78,8 +90,9 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 - [`setup.py`](setup.py) and [`sdist_upip.py`](sdist_upip.py) file
 
 <!-- Links -->
-[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.5.0...main
+[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.6.0...main
 
+[0.6.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.6.0
 [0.5.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.5.0
 [0.4.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.4.0
 [0.3.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.3.0
