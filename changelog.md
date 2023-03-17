@@ -17,6 +17,26 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 -->
 
 ## Released
+## [0.7.0] - 2023-03-17
+### Added
+- Set settings for JSON files to use an indentation of 4 in `.editorconfig`
+- `package.json` for `mip` installation with MicroPython v1.19.1 or newer
+- Instructions for installation with `mip` on  MicroPython v1.19.1 or newer in `README`
+- Instructions to be performed after using this template package in `README`
+- Example files for `boot` and `main`
+
+### Changed
+- Omit package version file from coverage calculation in `.coveragerc`
+- Run test workflow also on pull requests
+- Update date of license to 2023
+
+### Removed
+- No longer used `update_version.py` file removed from flake8 exclude list
+
+### Fixed
+- Path to documentation build output folder is only highlighted to avoid broken links errors
+- Mock commonly used MicroPython specific modules in docs config file
+
 ## [0.6.0] - 2023-02-22
 ### Added
 - `.editorconfig` for common editor settings, see #12
@@ -90,8 +110,9 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 - [`setup.py`](setup.py) and [`sdist_upip.py`](sdist_upip.py) file
 
 <!-- Links -->
-[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.6.0...main
+[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.7.0...main
 
+[0.7.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.7.0
 [0.6.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.6.0
 [0.5.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.5.0
 [0.4.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.4.0
