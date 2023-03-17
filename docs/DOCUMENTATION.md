@@ -34,7 +34,7 @@ sphinx-build docs/ docs/build/linkcheck -d docs/build/docs_doctree/ --color -bli
 sphinx-build docs/ docs/build/html/ -d docs/build/docs_doctree/ --color -bhtml -j auto -W
 ```
 
-The created documentation can be found at [`docs/build/html`](docs/build/html).
+The created documentation can be found at `docs/build/html`.
 
 <!-- Links -->
 [ref-rtd-micropython-package-template]: https://micropython-package-template.readthedocs.io/en/latest/
