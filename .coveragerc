@@ -10,7 +10,7 @@ omit =
     .tox/*,
     build/*,
     dist/*,
-    version.py
+    be_upy_blink/version.py
 
 [report]
 # include = src/*
