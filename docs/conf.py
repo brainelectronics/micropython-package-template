@@ -14,16 +14,22 @@ sys.path.insert(0, os.path.abspath('../'))
 here = Path(__file__).parent.resolve()
 
 try:
-    import be_upy_blink
-except ImportError:
-    raise SystemExit("be_upy_blink has to be importable")
-else:
     # Inject mock modules so that we can build the
     # documentation without having the real stuff available
     from mock import Mock
 
-    sys.modules['micropython'] = Mock()
-    print("Mocked 'micropython' module")
+    to_be_mocked = [
+        'micropython',
+        'machine',
+        'time.sleep_ms', 'time.sleep_us',
+    ]
+    for module in to_be_mocked:
+        sys.modules[module] = Mock()
+        print("Mocked '{}' module".format(module))
+
+    import be_upy_blink
+except ImportError:
+    raise SystemExit("be_upy_blink has to be importable")
 
 # load elements of version.py
 exec(open(here / '..' / 'be_upy_blink' / 'version.py').read())
