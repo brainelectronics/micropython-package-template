@@ -77,6 +77,13 @@ station.isconnected()
 Install the latest package version of this lib on the MicroPython device
 
 ```python
+import mip
+mip.install("github:brainelectronics/micropython-package-template")
+```
+
+For MicroPython versions below 1.19.1 use the `upip` package instead of `mip`
+
+```python
 import upip
 upip.install('micropython-package-template')
 ```
@@ -84,6 +91,16 @@ upip.install('micropython-package-template')
 #### Specific version
 
 Install a specific, fixed package version of this lib on the MicroPython device
+
+```python
+import mip
+# install a verions of a specific branch
+mip.install("github:brainelectronics/micropython-package-template", version="feature/initial-implementation")
+# install a tag version
+mip.install("github:brainelectronics/micropython-package-template", version="0.6.0")
+```
+
+For MicroPython versions below 1.19.1 use the `upip` package instead of `mip`
 
 ```python
 import upip
@@ -96,6 +113,13 @@ Install a specific release candidate version uploaded to
 [Test Python Package Index](https://test.pypi.org/) on every PR on the
 MicroPython device. If no specific version is set, the latest stable version
 will be used.
+
+```python
+import mip
+mip.install("github:brainelectronics/micropython-package-template", version="0.6.0-rc9.dev13")
+```
+
+For MicroPython versions below 1.19.1 use the `upip` package instead of `mip`
 
 ```python
 import upip
