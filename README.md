@@ -15,6 +15,9 @@ MicroPython PyPi package template project with auto deploy
 
 MicroPython PyPi package template with GitHub Action based testing and deploy
 
+📚 The latest documentation is available at
+[MicroPython Package Template ReadTheDocs][ref-rtd-micropython-package-template] 📚
+
 <!-- MarkdownTOC -->
 
 - [Installation](#installation)
@@ -244,6 +247,7 @@ The coverage report is placed at `reports/coverage/html/index.html`
 Based on the [PyPa sample project][ref-pypa-sample].
 
 <!-- Links -->
+[ref-rtd-micropython-package-template]: https://micropython-package-template.readthedocs.io/en/latest/
 [ref-remote-upy-shell]: https://github.com/dhylands/rshell
 [ref-brainelectronics-test-pypiserver]: https://github.com/brainelectronics/test-pypiserver
 [ref-pypa-sample]: https://github.com/pypa/sampleproject
