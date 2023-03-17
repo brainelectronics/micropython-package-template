@@ -6,7 +6,7 @@
         ],
         [
             "be_upy_blink/blink.py",
-            "github:brainelectronics/micropython-package-template/be_upy_blink/const.py"
+            "github:brainelectronics/micropython-package-template/be_upy_blink/blink.py"
         ],
         [
             "be_upy_blink/version.py",
