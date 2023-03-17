@@ -36,6 +36,7 @@ MicroPython PyPi package template with GitHub Action based testing and deploy
 	- [Upload to PyPi](#upload-to-pypi)
 - [Contributing](#contributing)
 	- [Unittests](#unittests)
+- [Steps after using this template](#steps-after-using-this-template)
 - [Credits](#credits)
 
 <!-- /MarkdownTOC -->
@@ -241,6 +242,27 @@ coverage html
 ```
 
 The coverage report is placed at `reports/coverage/html/index.html`
+
+## Steps after using this template
+
+In order to use this template for a new MicroPython package to following steps
+should be done and changes to these file being made
+
+| File | Changes | More details |
+| ---- | ------- | -------------|
+| `.coveragerc` | Path to `version.py` file | Omit version file from coverage |
+| `.coveragerc` | Path to `include` folder | Include the package folder for coverage |
+| `.github/workflows/release.yml` | Path to `version.py` file | Use package version file to set changelog based version |
+| `.github/workflows/test-release.yml` | Path to `version.py` file | Use package version file to set changelog based version |
+| `.github/workflows/test.yml` | Path to `version.py` file | Use package version file to set changelog based version |
+| `README.md` | Links in header section and installation instructions | |
+| `changelog.md` | Cleanup changelog from informations of template | Keep usage of SemVer |
+| `docs/DOCUMENTATION.md` | Kink to ReadTheDocs | |
+| `docs/conf.py` | List to modules to be mocked, package import, path to `version.py` file, update `author`, `project` and `linkcheck_ignore` | |
+| `docs/index.rst` | Header name and included modules | Replace `be_upy_blink` with new `.rst` file of new package |
+| `docs/NEW_MODULE_NAME.rst` | Create a new `.rst` file  named as the package | Use `docs/be_upy_blink.rst` as template |
+| `package.json` | Files and paths to new package and repo | Used by `mip` |
+| `setup.py` | Path to `version.py` file, `name`, `description`, `url`, `author`, `author_email`, `keywords`, `project_urls`, `packages`, `install_requires` | Used to create the package and its informations published at e.g. PyPI |
 
 ## Credits
 
