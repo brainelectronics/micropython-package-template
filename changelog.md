@@ -17,6 +17,11 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 -->
 
 ## Released
+## [0.8.0] - 2023-03-29
+### Added
+- Add `MicoPython` as `Implementation` in setup `classifiers`, see [#16](https://github.com/brainelectronics/micropython-package-template/issues/16)
+- Verify `package.json` against latest changelog and setup in test workflow, see [#17](https://github.com/brainelectronics/micropython-package-template/issues/17)
+
 ## [0.7.0] - 2023-03-17
 ### Added
 - Set settings for JSON files to use an indentation of 4 in `.editorconfig`
@@ -110,8 +115,9 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 - [`setup.py`](setup.py) and [`sdist_upip.py`](sdist_upip.py) file
 
 <!-- Links -->
-[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.7.0...main
+[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.8.0...main
 
+[0.8.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.8.0
 [0.7.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.7.0
 [0.6.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.6.0
 [0.5.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.5.0
