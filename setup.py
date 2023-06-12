@@ -28,7 +28,7 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: Implementation :: MicroPython',
     ],
-    keywords='micropython, template',
+    keywords='micropython, template, package',
     project_urls={
         'Bug Reports': 'https://github.com/brainelectronics/micropython-package-template/issues',
         'Source': 'https://github.com/brainelectronics/micropython-package-template',
