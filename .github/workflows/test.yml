@@ -63,3 +63,6 @@ jobs:
             --package_changelog_file changelog.md \
             --package_file package.json \
             --validate
+        # use --ignore-version to skip version validation
+        # use --ignore-deps to skip dependency validation
+        # use --ignore-boot-main to skip boot.py and main.py files in URLs
