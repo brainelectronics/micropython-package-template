@@ -72,6 +72,7 @@ Connect the MicroPython device to a network (if possible)
 ```python
 import network
 station = network.WLAN(network.STA_IF)
+station.active(True)
 station.connect('SSID', 'PASSWORD')
 station.isconnected()
 ```
@@ -104,11 +105,12 @@ mip.install("github:brainelectronics/micropython-package-template", version="fea
 mip.install("github:brainelectronics/micropython-package-template", version="0.6.0")
 ```
 
-For MicroPython versions below 1.19.1 use the `upip` package instead of `mip`
+For MicroPython versions below 1.19.1 use the `upip` package instead of `mip`.
+With `upip` always the latest available version will be installed.
 
 ```python
 import upip
-upip.install('micropython-package-template==0.1.1')
+upip.install('micropython-package-template')
 ```
 
 #### Test version
@@ -123,13 +125,14 @@ import mip
 mip.install("github:brainelectronics/micropython-package-template", version="0.6.0-rc9.dev13")
 ```
 
-For MicroPython versions below 1.19.1 use the `upip` package instead of `mip`
+For MicroPython versions below 1.19.1 use the `upip` package instead of `mip`.
+With `upip` always the latest available version will be installed.
 
 ```python
 import upip
 # overwrite index_urls to only take artifacts from test.pypi.org
 upip.index_urls = ['https://test.pypi.org/pypi']
-upip.install('micropython-package-template==0.2.0rc1.dev6')
+upip.install('micropython-package-template')
 ```
 
 See also [brainelectronics Test PyPi Server in Docker][ref-brainelectronics-test-pypiserver]
