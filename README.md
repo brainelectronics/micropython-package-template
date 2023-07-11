@@ -23,7 +23,7 @@ MicroPython PyPi package template with GitHub Action based testing and deploy
 - [Installation](#installation)
 	- [Install required tools](#install-required-tools)
 - [Setup](#setup)
-	- [Install package with upip](#install-package-with-upip)
+	- [Install package](#install-package)
 		- [General](#general)
 		- [Specific version](#specific-version)
 		- [Test version](#test-version)
@@ -65,7 +65,7 @@ pip install -r requirements.txt
 
 ## Setup
 
-### Install package with upip
+### Install package
 
 Connect the MicroPython device to a network (if possible)
 
@@ -230,6 +230,11 @@ Run the unittests locally with the following command after installing this
 package in a virtual environment
 
 ```bash
+# create a report directory where all generated report files are placed
+python create_report_dirs.py
+```
+
+```bash
 # run all tests
 nose2 --config tests/unittest.cfg
 
@@ -240,7 +245,6 @@ nose2 tests.test_blink.TestBlink.test_flash_led
 Generate the coverage files with
 
 ```bash
-python create_report_dirs.py
 coverage html
 ```
 
@@ -258,6 +262,7 @@ should be done and changes to these file being made
 | `.github/workflows/release.yml` | Path to `version.py` file | Use package version file to set changelog based version |
 | `.github/workflows/test-release.yml` | Path to `version.py` file | Use package version file to set changelog based version |
 | `.github/workflows/test.yml` | Path to `version.py` file | Use package version file to set changelog based version |
+| `.pre-commit-config.yaml` | Path to `version.py` file | Use package version file for validation against latest changelog based version |
 | `README.md` | Links in header section and installation instructions | |
 | `changelog.md` | Cleanup changelog from informations of template | Keep usage of SemVer |
 | `docs/DOCUMENTATION.md` | Kink to ReadTheDocs | |

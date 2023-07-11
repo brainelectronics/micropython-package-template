@@ -17,6 +17,15 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 -->
 
 ## Released
+## [0.9.0] - 2023-07-11
+### Added
+- Precommit hooks for `package.json` and package version file validation, yaml style, flake8 and trailing whitespace checks
+- Contribution guideline
+- Package version file validation step in test workflow
+
+### Fixed
+- Added missing empty line in several files
+
 ## [0.8.1] - 2023-06-12
 ### Fixed
 - Usage documentation with more comments and WiFi instructions in root README
@@ -121,8 +130,9 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 - [`setup.py`](setup.py) and [`sdist_upip.py`](sdist_upip.py) file
 
 <!-- Links -->
-[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.8.1...main
+[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.9.0...main
 
+[0.9.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.9.0
 [0.8.1]: https://github.com/brainelectronics/micropython-package-template/tree/0.8.1
 [0.8.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.8.0
 [0.7.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.7.0
