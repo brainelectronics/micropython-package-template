@@ -17,6 +17,15 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 -->
 
 ## Released
+## [0.9.0] - 2023-07-11
+### Added
+- Precommit hooks for `package.json` and package version file validation, yaml style, flake8 and trailing whitespace checks
+- Contribution guideline
+- Package version file validation step in test workflow
+
+### Fixed
+- Added missing empty line in several files
+
 ## [0.8.1] - 2023-06-12
 ### Fixed
 - Usage documentation with more comments and WiFi instructions in root README

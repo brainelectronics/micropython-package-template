@@ -1,0 +1,39 @@
+---
+
+# To install pre-commit hooks, install `pre-commit` and activate it here:
+#     pip3 install pre-commit
+#     pre-commit install
+#
+default_stages:
+  - commit
+  - push
+  - manual
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: check-yaml
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+  - repo: https://github.com/PyCQA/flake8
+    rev: 5.0.4
+    hooks:
+      - id: flake8
+  - repo: https://github.com/brainelectronics/micropython-package-validation
+    rev: 0.5.0
+    hooks:
+      - id: upy-package
+        args:
+          - "--setup_file=setup.py"
+          - "--package_changelog_file=changelog.md"
+          - "--package_file=package.json"
+          - "--validate"
+  - repo: https://github.com/brainelectronics/changelog2version
+    rev: 0.10.0
+    hooks:
+      - id: changelog2version
+        args:
+          - "--changelog_file=changelog.md"
+          - "--version_file=be_upy_blink/version.py"
+          - "--validate"
