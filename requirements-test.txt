@@ -1,7 +1,9 @@
 # List external packages here
 # Avoid fixed versions
-flake8>=5.0.0,<6
+changelog2version>=0.10.0,<1
 coverage>=6.4.2,<7
+flake8>=5.0.0,<6
 nose2>=0.12.0,<1
-yamllint>=1.29,<2
 setup2upypackage>=0.1.0,<1
+pre-commit>=3.3.3,<4
+yamllint>=1.29,<2
