@@ -130,8 +130,9 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 - [`setup.py`](setup.py) and [`sdist_upip.py`](sdist_upip.py) file
 
 <!-- Links -->
-[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.8.1...main
+[Unreleased]: https://github.com/brainelectronics/micropython-package-template/compare/0.9.0...main
 
+[0.9.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.9.0
 [0.8.1]: https://github.com/brainelectronics/micropython-package-template/tree/0.8.1
 [0.8.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.8.0
 [0.7.0]: https://github.com/brainelectronics/micropython-package-template/tree/0.7.0

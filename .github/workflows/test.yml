@@ -41,6 +41,9 @@ jobs:
         run: |
           yamllint .
       - name: Validate package version file
+        # the package version file has to be always up to date as mip is using
+        # the file directly from the repo. On a PyPi package the version file
+        # is updated and then packed
         run: |
           changelog2version \
             --changelog_file changelog.md \
