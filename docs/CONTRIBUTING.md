@@ -112,7 +112,7 @@ this project adheres to [Semantic Versioning][ref-semantic-versioning].
 Please add a changelog snippet for every PR you contribute. The changes are
 categorised into:
 
-- `Bugfixes` fix an issue which can be used out of the box without any further
+- `bugfixes` fix an issue which can be used out of the box without any further
 changes required by the user. Be aware that in some cases bugfixes can be
 breaking changes.
 - `features` is used to indicate a backwards compatible change providing
@@ -146,8 +146,11 @@ Commit the changes and the snippet file and run the following command to create
 a changelog with the latest snippet included
 
 ```bash
-changelog-generator changelog changelog.md --snippets=.snippets
+changelog-generator changelog changelog.md --snippets=.snippets --in-place
 ```
+
+*Be aware to restore the changelog before another run as it might generate
+version entries and version bumps multiple times otherwise.*
 
 ### Version file
 
