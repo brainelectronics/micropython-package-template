@@ -1,3 +1,7 @@
+# snippets2changelog specific
+changelog.md
+changelog.md.new
+
 # custom, package specific ignores
 .DS_Store
 .DS_Store?

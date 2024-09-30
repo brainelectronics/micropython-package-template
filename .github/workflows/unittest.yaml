@@ -14,10 +14,10 @@ jobs:
   test-and-coverage:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.11'
       - name: Execute tests
         run: |
           pip install -r requirements-test.txt
