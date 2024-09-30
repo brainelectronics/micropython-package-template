@@ -30,11 +30,12 @@ jobs:
         run: |
           changelog-generator \
             changelog changelog.md \
-            --snippets=.snippets
+            --snippets=.snippets \
+            --in-place
       - name: Build package
         run: |
           changelog2version \
-            --changelog_file changelog.md.new \
+            --changelog_file changelog.md \
             --version_file be_upy_blink/version.py \
             --version_file_type py \
             --debug
@@ -54,7 +55,7 @@ jobs:
           # note you'll typically need to create a personal access token
           # with permissions to create releases in the other repo
           # or you set the "contents" permissions to "write" as in this example
-          changelog-path: changelog.md.new
+          changelog-path: changelog.md
           tag-name-prefix: ''
           tag-name-extension: ''
           release-name-prefix: ''
