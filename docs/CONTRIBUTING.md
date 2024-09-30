@@ -107,29 +107,49 @@ pre-commit run --all-files
 The changelog format is based on [Keep a Changelog][ref-keep-a-changelog], and
 this project adheres to [Semantic Versioning][ref-semantic-versioning].
 
-Please add a changelog entry for every PR you contribute. The versions are
-seperated into `MAJOR.MINOR.PATCH`:
+### General
 
-- Increment the major version by 1 in case you created a breaking, non
-backwards compatible change which requires the user to perform additional
-tasks, adopt his currently running code or in general can't be used as is anymore.
-- Increment the minor version by 1 on new "features" which can be used or are
-optional, but in either case do not require any changes by the user to keep
-the system running after upgrading.
-- Increment the patch version by 1 on bugfixes which fix an issue but can be
-used out of the box, like features, without any changes by the user. In some
-cases bugfixes can be breaking changes of course.
+Please add a changelog snippet for every PR you contribute. The changes are
+categorised into:
 
-Please add the date the change has been made as well to the changelog
-following the format `## [MAJOR.MINOR.PATCH] - YYYY-MM-DD`. It is not
-necessary to keep this date up to date, it is just used as meta data.
+- `Bugfixes` fix an issue which can be used out of the box without any further
+changes required by the user. Be aware that in some cases bugfixes can be
+breaking changes.
+- `features` is used to indicate a backwards compatible change providing
+improved or extended functionalitiy. This does, as `bugfixes`, in any case
+not require any changes by the user to keep the system running after upgrading.
+- `breaking` creates a breaking, non backwards compatible change which
+requires the user to perform additional tasks, adopt his currently running
+code or in general can't be used as is anymore.
 
 The changelog entry shall be short but meaningful and can of course contain
 links and references to other issues or PRs. New lines are only allowed for a
 new bulletpoint entry. Usage examples or other code snippets should be placed
 in the code documentation, README or the docs folder.
 
-### General
+### Creation
+
+To create a new changelog snippet use the CLI tool with its simple interface.
+Use the issue number, in this example `22.md`, as the snippet name. The
+extension shall always be `.md`.
+
+```bash
+changelog-generator create .snippets/22.md
+```
+
+The tool will create a basic snippet which can and should be extended with a
+detailed description of the change after the file creation.
+
+### Generation
+
+Commit the changes and the snippet file and run the following command to create
+a changelog with the latest snippet included
+
+```bash
+changelog-generator changelog changelog.md --snippets=.snippets
+```
+
+### Version file
 
 The package version file, located at `<PACKAGE_NAME>/version.py` contains the
 latest changelog version.

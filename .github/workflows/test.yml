@@ -40,13 +40,18 @@ jobs:
       - name: Lint with yamllint
         run: |
           yamllint .
+      - name: Update changelog with snippets
+        run: |
+          changelog-generator \
+            changelog changelog.md \
+            --snippets=.snippets
       - name: Validate package version file
         # the package version file has to be always up to date as mip is using
         # the file directly from the repo. On a PyPi package the version file
         # is updated and then packed
         run: |
           changelog2version \
-            --changelog_file changelog.md \
+            --changelog_file changelog.md.new \
             --version_file be_upy_blink/version.py \
             --version_file_type py \
             --validate \
@@ -55,7 +60,7 @@ jobs:
         run: |
           upy-package \
             --setup_file setup.py \
-            --package_changelog_file changelog.md \
+            --package_changelog_file changelog.md.new \
             --package_file package.json \
             --validate
         # use --ignore-version to skip version validation
