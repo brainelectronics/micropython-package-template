@@ -26,11 +26,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/checkout@v4
         with:
-          python-version: '3.9'
+          # all history is needed to crawl it properly
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
       - name: Install test dependencies
         run: |
           pip install -r requirements-test.txt
@@ -40,6 +43,12 @@ jobs:
       - name: Lint with yamllint
         run: |
           yamllint .
+      - name: Update changelog with snippets
+        run: |
+          changelog-generator \
+            changelog changelog.md \
+            --snippets=.snippets \
+            --in-place
       - name: Validate package version file
         # the package version file has to be always up to date as mip is using
         # the file directly from the repo. On a PyPi package the version file
