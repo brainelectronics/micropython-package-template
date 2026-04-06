@@ -30,10 +30,13 @@ from distutils.filelist import FileList
 from setuptools.command.sdist import sdist as _sdist
 
 
+# include, exclude
 FILTERS = [
-    # include, exclude, repeat
-    (r".+\.egg-info/(PKG-INFO|requires\.txt)", r"setup.py$"),
-    (r".+\.py$", r"[^/]+$"),
+    # include required metadata files in .egg-info
+    (r".+\.egg-info/(PKG-INFO|requires\.txt)", r"setup.(py|cfg)$"),
+    # include all Python files and the PKG-INFO
+    (r".+\.py$|^PKG-INFO$|^LICENSE\.txt$", r"[^\/]+$"),
+    # exclude all other .egg-info files
     (None, r".+\.egg-info/.+"),
 ]
 outbuf = io.BytesIO()

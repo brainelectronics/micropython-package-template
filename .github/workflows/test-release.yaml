@@ -5,7 +5,7 @@
 
 name: Upload Python Package to test.pypi.org
 
-on: [pull_request]
+on: [pull_request]  # yamllint disable-line rule:truthy
 
 permissions:
   contents: write
@@ -15,12 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           # all history is needed to crawl it properly
           fetch-depth: 0
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
       - name: Install build dependencies
@@ -47,7 +47,7 @@ jobs:
           rm dist/*.orig
           twine check dist/*.tar.gz
       - name: Archive build package artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v7
         with:
           # https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
           # ${{ github.repository }} and ${{ github.ref_name }} can't be used
@@ -56,7 +56,7 @@ jobs:
           path: dist/*.tar.gz
           retention-days: 14
       - name: Publish package
-        uses: pypa/gh-action-pypi-publish@release/v1.5
+        uses: pypa/gh-action-pypi-publish@release/v1.13
         with:
           repository_url: https://test.pypi.org/legacy/
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
@@ -64,7 +64,7 @@ jobs:
           verbose: true
           print_hash: true
       - name: 'Create changelog based prerelease'
-        uses: brainelectronics/changelog-based-release@v1
+        uses: brainelectronics/changelog-based-release@v1.1.0
         with:
           # note you'll typically need to create a personal access token
           # with permissions to create releases in the other repo

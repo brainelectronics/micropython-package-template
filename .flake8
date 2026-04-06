@@ -14,7 +14,8 @@
 # D400: First line should end with a period
 # W504: line break after binary operator -> Cannot break line with a long pathlib Path
 # D204: 1 blank line required after class docstring
-ignore = D107, D400, W504, D204
+# T201: print found
+ignore = D107, D400, W504, D204, T201
 
 # Specify a list of mappings of files and the codes that should be ignored for the entirety of the file.
 per-file-ignores =
@@ -25,7 +26,7 @@ exclude =
     # No need to traverse our git directory
     .git,
     # Python virtual environments
-    .venv,
+    .venv*,
     # tox virtual environments
     .tox,
     # There's no value in checking cache directories
