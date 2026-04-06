@@ -5,12 +5,12 @@
             "github:brainelectronics/micropython-package-template/be_upy_blink/__init__.py"
         ],
         [
-            "be_upy_blink/blink.py",
-            "github:brainelectronics/micropython-package-template/be_upy_blink/blink.py"
-        ],
-        [
             "be_upy_blink/version.py",
             "github:brainelectronics/micropython-package-template/be_upy_blink/version.py"
+        ],
+        [
+            "be_upy_blink/blink.py",
+            "github:brainelectronics/micropython-package-template/be_upy_blink/blink.py"
         ]
     ],
     "deps": [],
