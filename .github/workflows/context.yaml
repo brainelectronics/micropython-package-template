@@ -1,5 +1,8 @@
 ---
 
+# this file is *not* meant to cover or endorse the use of GitHub Actions, but
+# rather to help make automated releases for this project
+
 name: Context testing
 
 on: [push, pull_request]  # yamllint disable-line rule:truthy
@@ -11,7 +14,10 @@ jobs:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+        # "event.pull_request.commits" is interesting
+        run: |
+          echo "$GITHUB_CONTEXT"
+          echo "$GITHUB_CONTEXT" | jq -c '.event.pull_request.commits'
       - name: Dump job context
         env:
           JOB_CONTEXT: ${{ toJson(job) }}
