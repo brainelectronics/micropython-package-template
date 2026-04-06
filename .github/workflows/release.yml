@@ -76,11 +76,13 @@ jobs:
           cat changelog.json
           DESIRED_BRANCH="release/${LATEST_CHANGELOG_VERSION}"
           echo "DESIRED_BRANCH: ${DESIRED_BRANCH}"
+          set +e
           git ls-remote \
             --exit-code \
             --heads \
             origin ${DESIRED_BRANCH} >/dev/null 2>&1
           EXIT_CODE=$?
+          set -e
           echo "EXIT_CODE: ${EXIT_CODE}"
           if [[ ${EXIT_CODE} == '0' ]]; then
             echo "Git branch '${DESIRED_BRANCH}' exists on remote"
