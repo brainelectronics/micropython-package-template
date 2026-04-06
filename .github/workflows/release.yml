@@ -35,16 +35,72 @@ jobs:
             changelog changelog.md \
             --snippets=.snippets \
             --in-place
-      - name: Build package
+      - name: Extract latest version from changelog
+        run: |
+          changelog2version \
+            --changelog_file changelog.md \
+            --print \
+            --debug \
+            --pretty \
+            --output changelog.json
+      - name: Update package.json file
+        run: |
+          upy-package \
+            --setup_file setup.py \
+            --package_changelog_file changelog.md \
+            --package_file package.json \
+            --pretty \
+            --create
+      - name: Update version.py file
         run: |
           changelog2version \
             --changelog_file changelog.md \
             --version_file be_upy_blink/version.py \
             --version_file_type py \
             --debug
+      - name: Build package
+        run: |
           python setup.py sdist
           rm dist/*.orig
         # sdist call create non conform twine files *.orig, remove them
+      - name: Test built package
+        run: |
+          twine check dist/*.tar.gz
+      - name: Create release branch
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          LATEST_CHANGELOG_VERSION=$(jq -r '.info.version' changelog.json)
+          echo "LATEST_CHANGELOG_VERSION: ${LATEST_CHANGELOG_VERSION}"
+          echo "changelog.json file:"
+          cat changelog.json
+          DESIRED_BRANCH="release/${LATEST_CHANGELOG_VERSION}"
+          echo "DESIRED_BRANCH: ${DESIRED_BRANCH}"
+          git ls-remote \
+            --exit-code \
+            --heads \
+            origin ${DESIRED_BRANCH} >/dev/null 2>&1
+          EXIT_CODE=$?
+          echo "EXIT_CODE: ${EXIT_CODE}"
+          if [[ ${EXIT_CODE} == '0' ]]; then
+            echo "Git branch '${DESIRED_BRANCH}' exists on remote"
+            git checkout release/${LATEST_CHANGELOG_VERSION}
+          elif [[ ${EXIT_CODE} == '2' ]]; then
+            echo "Git branch '${DESIRED_BRANCH}' does not exist on remote"
+            git checkout -b release/${LATEST_CHANGELOG_VERSION}
+          fi
+          git diff > diff.log
+          echo "Diff in repo"
+          cat diff.log
+          if [[ $(git status --porcelain --untracked-files=no | wc -l) -gt 0 ]]; then
+            echo "changed files available"
+            git add package.json changelog.md be_upy_blink/version.py
+            git status
+            git commit -m "chore: files for release ${LATEST_CHANGELOG_VERSION}"
+            git push -u origin release/${LATEST_CHANGELOG_VERSION}
+          else
+            echo "nothing new to commit and push"
+          fi
       - name: Publish package
         uses: pypa/gh-action-pypi-publish@release/v1.13
         with:

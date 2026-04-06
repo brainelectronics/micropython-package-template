@@ -32,7 +32,23 @@ jobs:
             changelog changelog.md \
             --snippets=.snippets \
             --in-place
-      - name: Build package
+      - name: Extract latest version from changelog
+        run: |
+          changelog2version \
+            --changelog_file changelog.md \
+            --print \
+            --debug \
+            --pretty \
+            --output changelog.json
+      - name: Update package.json file
+        run: |
+          upy-package \
+            --setup_file setup.py \
+            --package_changelog_file changelog.md \
+            --package_file package.json \
+            --pretty \
+            --create
+      - name: Update version.py file
         run: |
           changelog2version \
             --changelog_file changelog.md \
@@ -40,11 +56,13 @@ jobs:
             --version_file_type py \
             --additional_version_info="-rc${{ github.run_number }}.dev${{ github.event.number }}" \
             --debug
-          python setup.py sdist
-      - name: Test built package
-        # sdist call creates non twine conform "*.orig" files, remove them
+      - name: Build package
         run: |
+          python setup.py sdist
           rm dist/*.orig
+        # sdist call creates non twine conform "*.orig" files, remove them
+      - name: Test built package
+        run: |
           twine check dist/*.tar.gz
       - name: Archive build package artifact
         uses: actions/upload-artifact@v7

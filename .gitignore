@@ -1,6 +1,9 @@
 # snippets2changelog specific
 changelog.md
 changelog.md.new
+changelog.json
+latest-entry.json
+latest_description.txt
 
 # custom, package specific ignores
 .DS_Store
