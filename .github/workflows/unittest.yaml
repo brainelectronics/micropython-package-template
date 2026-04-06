@@ -5,7 +5,7 @@
 
 name: Unittest Python Package
 
-on: [push, pull_request]
+on: [push, pull_request]  # yamllint disable-line rule:truthy
 
 permissions:
   contents: read
@@ -14,8 +14,8 @@ jobs:
   test-and-coverage:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
       - name: Execute tests
@@ -27,7 +27,7 @@ jobs:
         run: |
           coverage xml
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./reports/coverage/coverage.xml
