@@ -33,9 +33,11 @@ jobs:
 
             const pr_number = pr.number;
             const workflow_name = context.workflow;
+            const branch_name = pr.head.ref;
             const event_match = "pull_request";
             console.log(pr_number);
             console.log(workflow_name);
+            console.log(branch_name);
 
             if (!pr_number) {
               console.log("No pull request number found in context.");
@@ -47,6 +49,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               event: event_match,
+              branch: branch_name,
               per_page: 100
             });
             // console.log(runs);
