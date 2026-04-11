@@ -18,6 +18,50 @@ jobs:
         run: |
           echo "$GITHUB_CONTEXT"
           echo "$GITHUB_CONTEXT" | jq -c '.event.pull_request.commits'
+      - name: Count test runs for this PR
+        if: ${{ !cancelled() }}
+        id: count
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+
+            if (!pr) {
+              core.setFailed("This workflow must be triggered by a pull request.");
+              return;
+            }
+
+            const pr_number = pr.number;
+            const workflow_name = context.workflow;
+            const event_match = "pull_request";
+            console.log(pr_number);
+            console.log(workflow_name);
+
+            if (!pr_number) {
+              console.log("No pull request number found in context.");
+              core.setOutput("count", 0);
+              return;
+            }
+
+            const runs = await github.rest.actions.listWorkflowRunsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              event: event_match,
+              per_page: 100
+            });
+            // console.log(runs);
+
+            const filtered = runs.data.workflow_runs.filter(run =>
+              run.name === workflow_name &&
+              run.event === event_match &&
+              run.pull_requests?.some(p => p.number === pr_number)
+            );
+            // console.log(filtered);
+            console.log(filtered.length);
+
+            core.setOutput("count", filtered.length);
+      - name: Dump job context
+        run: echo "Test run count = ${{ steps.count.outputs.count }}"
       - name: Dump job context
         env:
           JOB_CONTEXT: ${{ toJson(job) }}
