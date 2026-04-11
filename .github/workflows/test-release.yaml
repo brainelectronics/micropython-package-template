@@ -19,6 +19,48 @@ jobs:
         with:
           # all history is needed to crawl it properly
           fetch-depth: 0
+      - name: Count run number
+        id: count
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) {
+              core.setFailed("This workflow must be triggered by a pull request.");
+              return;
+            }
+
+            const pr_number = pr.number;
+            const workflow_name = context.workflow;
+            const branch_name = pr.head.ref;
+            const event_match = "pull_request";
+            console.log("PR Number: " + pr_number);
+            console.log("Workflow name: " + workflow_name);
+            console.log("Branch name: " + branch_name);
+
+            if (!pr_number) {
+              console.log("No pull request number found in context.");
+              core.setOutput("count", 0);
+              return;
+            }
+
+            const runs = await github.rest.actions.listWorkflowRunsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              event: event_match,
+              branch: branch_name,
+              per_page: 100
+            });
+
+            const filtered = runs.data.workflow_runs.filter(run =>
+              run.name === workflow_name &&
+              run.event === event_match &&
+              run.pull_requests?.some(p => p.number === pr_number)
+            );
+            console.log("Matches for filters aka runs: " + filtered.length);
+
+            const count = filtered.length > 0 ? filtered.length : 1;
+            core.setOutput("rc_number", count);
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
@@ -54,7 +96,7 @@ jobs:
             --changelog_file changelog.md \
             --version_file be_upy_blink/version.py \
             --version_file_type py \
-            --additional_version_info="-rc${{ github.run_number }}.dev${{ github.event.number }}" \
+            --additional_version_info="-rc${{ steps.count.outputs.rc_number }}.dev${{ github.event.number }}" \
             --debug
       - name: Build package
         run: |
@@ -70,7 +112,7 @@ jobs:
           # https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
           # ${{ github.repository }} and ${{ github.ref_name }} can't be used
           # for artifact name due to unallowed '/'
-          name: dist_repo.${{ github.event.repository.name }}_sha.${{ github.sha }}_build.${{ github.run_number }}
+          name: dist_repo.${{ github.event.repository.name }}_sha.${{ github.sha }}_build.${{ steps.count.outputs.rc_number }}
           path: dist/*.tar.gz
           retention-days: 14
       - name: Publish package
@@ -89,8 +131,8 @@ jobs:
           # or you set the "contents" permissions to "write" as in this example
           changelog-path: changelog.md
           tag-name-prefix: ''
-          tag-name-extension: '-rc${{ github.run_number }}.dev${{ github.event.number }}'
+          tag-name-extension: '-rc${{ steps.count.outputs.rc_number }}.dev${{ github.event.number }}'
           release-name-prefix: ''
-          release-name-extension: '-rc${{ github.run_number }}.dev${{ github.event.number }}'
+          release-name-extension: '-rc${{ steps.count.outputs.rc_number }}.dev${{ github.event.number }}'
           draft-release: true
           prerelease: true
