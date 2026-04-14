@@ -8,12 +8,31 @@ Do your stuff here, similar to the loop() function on Arduino
 
 from be_upy_blink import flash_led
 from machine import Pin
+try:
+    from os import uname
+except ImportError:
+    # u-packages might be deprecated in future
+    from uos import uname
 from time import sleep
 
 
 def loop():
-    # set pin D4 as output (blue LED) and turn it off
-    led_pin = Pin(4, Pin.OUT)
+    os_info = uname()
+
+    # set pin as output
+    if 'pyboard' in os_info:
+        led_pin = Pin(1, Pin.OUT)
+    elif 'esp8266' in os_info:
+        led_pin = Pin(2, Pin.OUT)
+    elif 'esp32' in os_info:
+        led_pin = Pin(2, Pin.OUT)
+    elif 'rp2' in os_info:
+        # RP2 has the LED on pin 25, Pico W on a custom pin routed to "LED"
+        led_pin = Pin("LED", Pin.OUT)
+    else:
+        raise Exception("Unknown board, manually extend main.py")
+
+    # turn it off
     led_pin.value(0)
 
     # loop forever
