@@ -6,14 +6,16 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![codecov](https://codecov.io/github/brainelectronics/micropython-package-template/branch/main/graph/badge.svg)](https://app.codecov.io/github/brainelectronics/micropython-package-template)
 [![CI](https://github.com/brainelectronics/micropython-package-template/actions/workflows/release.yml/badge.svg)](https://github.com/brainelectronics/micropython-package-template/actions/workflows/release.yml)
+![Humans](https://img.shields.io/badge/Created_by-Humans-blue?style=flat
+)
 
-MicroPython PyPi package template project with auto deploy
+MicroPython (PyPI) package template project with auto deploy
 
 ---------------
 
 ## General
 
-MicroPython PyPi package template with GitHub Action based testing and deploy
+MicroPython (PyPI) package template with GitHub Action based testing and deploy
 
 📚 The latest documentation is available at
 [MicroPython Package Template ReadTheDocs][ref-rtd-micropython-package-template] 📚
@@ -23,17 +25,19 @@ MicroPython PyPi package template with GitHub Action based testing and deploy
 - [Installation](#installation)
 	- [Install required tools](#install-required-tools)
 - [Setup](#setup)
-	- [Install package](#install-package)
+	- [Install package from the web](#install-package-from-the-web)
 		- [General](#general)
 		- [Specific version](#specific-version)
 		- [Test version](#test-version)
 	- [Manually](#manually)
 		- [Upload files to board](#upload-files-to-board)
+			- [mpremote](#mpremote)
+			- [rshell](#rshell)
 - [Usage](#usage)
-- [Create a PyPi \(micropython\) package](#create-a-pypi-micropython-package)
+- [Create a PyPI \(micropython\) package](#create-a-pypi-micropython-package)
 	- [Setup](#setup-1)
 	- [Create a distribution](#create-a-distribution)
-	- [Upload to PyPi](#upload-to-pypi)
+	- [Upload to PyPI](#upload-to-pypi)
 - [Contributing](#contributing)
 	- [Unittests](#unittests)
 - [Steps after using this template](#steps-after-using-this-template)
@@ -60,14 +64,21 @@ returned, use that command to proceed.
 python3 -m venv .venv
 source .venv/bin/activate
 
+# to interact with a MicroPython board
 pip install -r requirements.txt
+
+# to run all tests or contribute to this repo
+pip install -r requirements-test.txt
+
+# to create and deploy a new version of this package
+pip install -r requirements-deploy.txt
 ```
 
 ## Setup
 
-### Install package
+### Install package from the web
 
-Connect the MicroPython device to a network (if possible)
+Connect the MicroPython device to a network, otherwise check the section [Manually](#manually) down below.
 
 ```python
 import network
@@ -86,11 +97,22 @@ import mip
 mip.install("github:brainelectronics/micropython-package-template")
 ```
 
-For MicroPython versions below 1.19.1 use the `upip` package instead of `mip`
+For MicroPython versions below `1.19.1` use the `upip` package instead of `mip`
 
 ```python
 import upip
 upip.install('micropython-package-template')
+```
+
+Run this code on the MicroPython device to check the used MicroPython version
+
+```python
+try:
+    from os import uname
+except ImportError:
+    # u-packages might be deprecated in future
+    from uos import uname
+os.uname().version
 ```
 
 #### Specific version
@@ -105,7 +127,7 @@ mip.install("github:brainelectronics/micropython-package-template", version="fea
 mip.install("github:brainelectronics/micropython-package-template", version="0.6.0")
 ```
 
-For MicroPython versions below 1.19.1 use the `upip` package instead of `mip`.
+For MicroPython versions below `1.19.1` use the `upip` package instead of `mip`.
 With `upip` always the latest available version will be installed.
 
 ```python
@@ -125,28 +147,46 @@ import mip
 mip.install("github:brainelectronics/micropython-package-template", version="0.6.0-rc9.dev13")
 ```
 
-For MicroPython versions below 1.19.1 use the `upip` package instead of `mip`.
-With `upip` always the latest available version will be installed.
+For MicroPython versions below `1.19.1` use the `upip` package instead of `mip`.
+If no specific version is set, `upip` will always install the latest available version.
 
 ```python
 import upip
 # overwrite index_urls to only take artifacts from test.pypi.org
 upip.index_urls = ['https://test.pypi.org/pypi']
 upip.install('micropython-package-template')
+
+# install a specific version
+upip.install("micropython-package-template==0.12.0rc37.dev29")
 ```
 
-See also [brainelectronics Test PyPi Server in Docker][ref-brainelectronics-test-pypiserver]
+See also [brainelectronics Test PyPI Server in Docker][ref-brainelectronics-test-pypiserver]
 for a test PyPi server running on Docker.
 
 ### Manually
 
+See [Install required tools](#install-required-tools) section on how to install the tools used onwards.
+
 #### Upload files to board
 
 Copy the module to the MicroPython board and import them as shown below
-using [Remote MicroPython shell][ref-remote-upy-shell]
+using [mpremote][ref-mpremote] or [Remote MicroPython shell][ref-remote-upy-shell].
+
+##### mpremote
+
+`mpremote` will auto-detect the MicroPython device. Check the [mpremote][ref-mpremote] documentation for further details.
+
+```bash
+mpremote fs mkdir :/lib
+mpremote fs cp -r be_upy_blink/ :/lib/
+mpremote fs cp examples/boot.py examples/main.py :
+mpremote fs ls :
+```
+
+##### rshell
 
 Open the remote shell with the following command. Additionally use `-b 115200`
-in case no CP210x is used but a CH34x.
+in case no `CP210x` USB to UART bridge is used but a `CH34x`.
 
 ```bash
 rshell --port /dev/tty.SLAB_USBtoUART --editor nano
@@ -166,6 +206,8 @@ cp examples/boot.py /pyboard
 ```
 
 ## Usage
+
+This is just a very lightweight MicroPython package template with a minimal functional library.
 
 ```python
 from be_upy_blink import flash_led
@@ -193,7 +235,7 @@ flash_led(pin=led_pin, amount=3)
 # flash_led(pin=led_pin, amount=3, on_time=1, off_time=3)
 ```
 
-## Create a PyPi (micropython) package
+## Create a PyPI (micropython) package
 
 ### Setup
 
@@ -223,7 +265,11 @@ python setup.py sdist
 A new folder `dist` will be created. The [`sdist_upip`](sdist_upip.py) will be
 used to create everything necessary.
 
-### Upload to PyPi
+The `dist/*.orig` file is the non stripped version of the created package.
+It contains further files which are necessary for a Python package but not
+required by MicroPython board and would use unnecessary flash on the device.
+
+### Upload to PyPI
 
 **Be aware: [pypi.org][ref-pypi] and [test.pypi.org][ref-test-pypi] are different**
 
@@ -235,6 +281,7 @@ For testing purposes add `--repository testpypi` to
 upload it to [test.pypi.org][ref-test-pypi]
 
 ```bash
+twine check dist/*.tar.gz
 twine upload dist/micropython-package-template-*.tar.gz -u PYPI_USERNAME -p PYPI_PASSWORD
 ```
 
@@ -279,6 +326,7 @@ should be done and changes to these file being made
 | `.github/workflows/test-release.yml` | Path to `version.py` file | Use package version file to set changelog based version |
 | `.github/workflows/test.yml` | Path to `version.py` file | Use package version file to set changelog based version |
 | `.pre-commit-config.yaml` | Path to `version.py` file | Use package version file for validation against latest changelog based version |
+| `LICENSE.txt` | Year and/or type of license | |
 | `README.md` | Links in header section and installation instructions | |
 | `changelog.md` | Cleanup changelog from informations of template | Keep usage of SemVer |
 | `docs/DOCUMENTATION.md` | Kink to ReadTheDocs | |
@@ -294,6 +342,7 @@ Based on the [PyPa sample project][ref-pypa-sample].
 
 <!-- Links -->
 [ref-rtd-micropython-package-template]: https://micropython-package-template.readthedocs.io/en/latest/
+[ref-mpremote]: https://docs.micropython.org/en/v1.28.0/reference/mpremote.html
 [ref-remote-upy-shell]: https://github.com/dhylands/rshell
 [ref-brainelectronics-test-pypiserver]: https://github.com/brainelectronics/test-pypiserver
 [ref-pypa-sample]: https://github.com/pypa/sampleproject
