@@ -17,6 +17,73 @@ r"^\#\# \[\d{1,}[.]\d{1,}[.]\d{1,}\] \- \d{4}\-\d{2}-\d{2}$"
 -->
 
 ## Released
+## [0.14.0] - 2026-04-14T18:22:20+02:00
+<!-- meta = {'type': 'feature', 'scope': ['all'], 'affected': ['all']} -->
+
+This change updates the manual package installation instructions to use `mpremote` over `rshell`.
+
+In the PyPI section the usage of `twine check` before `twine upload` is recommended.
+
+An example instruction on how to install a specific version with `upip` was added.
+
+The package usage example and the corresponding `main.py` example files are extended to set the LED pin based on the board extracted from `os.uname()`.
+
+This closes [#34](https://github.com/brainelectronics/micropython-package-template/issues/34)
+
+[0.14.0]: https://github.com/brainelectronics/snippets2changelog/tree//0.14.0
+
+## [0.13.1] - 2026-04-11T21:15:55+02:00
+<!-- meta = {'type': 'bugfix', 'scope': ['all'], 'affected': ['all']} -->
+
+This change creates the correct release candidate number based on the action run of a pull request workflow run `test-release` instead of the total number of this workflow run. By this fix, the `-rcX` metadata starts at `1` and is incremented with every push, no matter if the push is a force push or a classic new commit on top in a ongoing pull request.
+
+This closes [#33](https://github.com/brainelectronics/micropython-package-template/issues/33)
+
+[0.13.1]: https://github.com/brainelectronics/snippets2changelog/tree//0.13.1
+
+## [0.13.0] - 2026-04-06T22:12:09+02:00
+<!-- meta = {'type': 'feature', 'scope': ['all'], 'affected': ['all']} -->
+
+This change creates a new release branch `release/<VERSION>` after a merge and adds the following files to it:
+- `changelog.md`
+- `package.json`
+- `<PACKAGE>/version.py`
+
+This closes [#28](https://github.com/brainelectronics/micropython-package-template/issues/28)
+
+[0.13.0]: https://github.com/brainelectronics/snippets2changelog/tree//0.13.0
+
+## [0.12.0] - 2026-04-06T19:55:15+02:00
+<!-- meta = {'type': 'feature', 'scope': ['all'], 'affected': ['all']} -->
+
+This change creates the latest changelog from all submitted snippets before building and deploying the [ReadTheDocs](https://micropython-package-template.readthedocs.io/en/latest/index.html) files
+
+This closes [#26](https://github.com/brainelectronics/micropython-package-template/issues/26)
+
+[0.12.0]: https://github.com/brainelectronics/snippets2changelog/tree//0.12.0
+
+## [0.11.0] - 2026-04-06T19:49:35+02:00
+<!-- meta = {'type': 'feature', 'scope': ['all'], 'affected': ['all']} -->
+
+This change updates all tools, python packages and GitHub actions to their latest version.
+
+The `sdist_upip.py` script does no longer remove the `PKG-INFO` and `LICENSE.txt` files from the root of the created `tar.gz` file to meet the [requirements of PyPI](https://packaging.python.org/en/latest/discussions/package-formats/)
+
+This closes [#24](https://github.com/brainelectronics/micropython-package-template/issues/24)
+
+[0.11.0]: https://github.com/brainelectronics/snippets2changelog/tree//0.11.0
+
+## [0.10.0] - 2024-10-01T00:37:03+02:00
+<!-- meta = {'type': 'feature', 'scope': ['all'], 'affected': ['all']} -->
+
+This change replaces the modifications and extensions of a changelog by
+generating the changelog with all its entries and versions based on changelog
+snippets like this one.
+
+This closes [#22](https://github.com/brainelectronics/micropython-package-template/issues/22)
+
+[0.10.0]: https://github.com/brainelectronics/snippets2changelog/tree//0.10.0
+
 ## [0.9.0] - 2023-07-11
 ### Added
 - Precommit hooks for `package.json` and package version file validation, yaml style, flake8 and trailing whitespace checks
