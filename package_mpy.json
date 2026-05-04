@@ -1,0 +1,18 @@
+{
+    "urls": [
+        [
+            "be_upy_blink/__init__.mpy",
+            "github:brainelectronics/micropython-package-template/be_upy_blink/__init__.mpy"
+        ],
+        [
+            "be_upy_blink/blink.mpy",
+            "github:brainelectronics/micropython-package-template/be_upy_blink/blink.mpy"
+        ],
+        [
+            "be_upy_blink/version.mpy",
+            "github:brainelectronics/micropython-package-template/be_upy_blink/version.mpy"
+        ]
+    ],
+    "deps": [],
+    "version": "0.15.0"
+}

@@ -178,8 +178,8 @@ using [mpremote][ref-mpremote] or [Remote MicroPython shell][ref-remote-upy-shel
 
 ```bash
 mpremote fs mkdir :/lib
-mpremote fs cp -r be_upy_blink/ :/lib/
-mpremote fs cp examples/boot.py examples/main.py :
+mpremote fs cp -rf be_upy_blink/*.py :/lib/
+mpremote fs cp -f examples/boot.py examples/main.py :
 mpremote fs ls :
 ```
 
