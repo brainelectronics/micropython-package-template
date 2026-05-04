@@ -136,3 +136,4 @@ jobs:
           release-name-extension: '-rc${{ steps.count.outputs.rc_number }}.dev${{ github.event.number }}'
           draft-release: true
           prerelease: true
+          from-commit-sha: ${{ github.head_ref }}
