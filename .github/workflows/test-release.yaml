@@ -124,7 +124,7 @@ jobs:
           verbose: true
           print_hash: true
       - name: 'Create changelog based prerelease'
-        uses: brainelectronics/changelog-based-release@v1.2.0
+        uses: brainelectronics/changelog-based-release@v1.2.1
         with:
           # note you'll typically need to create a personal access token
           # with permissions to create releases in the other repo
@@ -136,4 +136,3 @@ jobs:
           release-name-extension: '-rc${{ steps.count.outputs.rc_number }}.dev${{ github.event.number }}'
           draft-release: true
           prerelease: true
-          from-commit-sha: ${{ github.head_ref }}

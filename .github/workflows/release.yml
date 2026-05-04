@@ -111,7 +111,7 @@ jobs:
           verbose: true
           print_hash: true
       - name: 'Create changelog based release'
-        uses: brainelectronics/changelog-based-release@v1.2.0
+        uses: brainelectronics/changelog-based-release@v1.2.1
         with:
           # note you'll typically need to create a personal access token
           # with permissions to create releases in the other repo
