@@ -61,6 +61,9 @@ jobs:
 
             const count = filtered.length > 0 ? filtered.length : 1;
             core.setOutput("rc_number", count);
+      - name: Print env
+        run: |
+          echo "$GITHUB_CONTEXT"
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
