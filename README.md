@@ -125,14 +125,19 @@ import mip
 mip.install("github:brainelectronics/micropython-package-template", version="feature/initial-implementation")
 # install a tag version
 mip.install("github:brainelectronics/micropython-package-template", version="0.6.0")
+
+# install pre-compiled package
+mip.install("github:brainelectronics/micropython-package-template/package_mpy.json")
+mip.install("github:brainelectronics/micropython-package-template/package_mpy.json", version="feature/provide-mpy-cross-files")
+mip.install("github:brainelectronics/micropython-package-template/package_mpy.json", version="0.15.0")
 ```
 
 For MicroPython versions below `1.19.1` use the `upip` package instead of `mip`.
-With `upip` always the latest available version will be installed.
+⚠️ There are no pre-compiled `.mpy` packages available.
 
 ```python
 import upip
-upip.install('micropython-package-template')
+upip.install('micropython-package-template==0.12.0')
 ```
 
 #### Test version
@@ -145,10 +150,12 @@ will be used.
 ```python
 import mip
 mip.install("github:brainelectronics/micropython-package-template", version="0.6.0-rc9.dev13")
+mip.install("github:brainelectronics/micropython-package-template/package_mpy.json", version="0.15.0-rc5.dev37")
 ```
 
 For MicroPython versions below `1.19.1` use the `upip` package instead of `mip`.
 If no specific version is set, `upip` will always install the latest available version.
+⚠️ There are no pre-compiled `.mpy` packages available.
 
 ```python
 import upip
@@ -181,6 +188,16 @@ mpremote fs mkdir :/lib
 mpremote fs cp -rf be_upy_blink/*.py :/lib/
 mpremote fs cp -f examples/boot.py examples/main.py :
 mpremote fs ls :
+```
+
+Or use the latest package files as defined in the `package.json` or `package_mpy.json` file from remote or as part of this repo
+
+```bash
+# install files as defined in (default) package.json
+mpremote mip install package.json
+
+# install *.mpy files as defined in "package_mpy.json" on tag "0.15.0-rc5.dev37"
+mpremote mip install github:brainelectronics/micropython-package-template/package_mpy.json@0.15.0-rc5.dev37
 ```
 
 ##### rshell
