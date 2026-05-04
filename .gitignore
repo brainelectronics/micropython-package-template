@@ -5,6 +5,9 @@ changelog.json
 latest-entry.json
 latest_description.txt
 
+# mpy-cross specific
+_mpy/
+
 # custom, package specific ignores
 .DS_Store
 .DS_Store?

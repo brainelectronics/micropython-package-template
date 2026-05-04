@@ -37,11 +37,35 @@ repos:
           - "--version_file_type=py"
           - "--validate"
   - repo: https://github.com/brainelectronics/micropython-package-validation
-    rev: 0.5.0
+    rev: 0.9.0
     hooks:
       - id: upy-package
+        name: upy-package
         args:
           - "--setup_file=setup.py"
           - "--package_changelog_file=changelog.md.new"
           - "--package_file=package.json"
           - "--validate"
+          - "--pretty"
+  - repo: local
+    hooks:
+      - id: mpy-cross
+        name: Create mpy files
+        entry: sh scripts/convert_to_mpy.sh be_upy_blink/
+        language: python
+        pass_filenames: false
+        types: [file, python]
+        additional_dependencies:
+          - "mpy-cross"
+  - repo: https://github.com/brainelectronics/micropython-package-validation
+    rev: 0.9.0
+    hooks:
+      - id: upy-package
+        name: upy-package-mpy
+        args:
+          - "--setup_file=setup.py"
+          - "--package_changelog_file=changelog.md.new"
+          - "--package_file=package_mpy.json"
+          - "--package_file_glob=*.mpy"
+          - "--validate"
+          - "--pretty"
